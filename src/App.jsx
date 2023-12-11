@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
@@ -6,7 +6,17 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-    setPersons(persons.concat({ name: newName }));
+
+    // Check if the name already exists
+    const isNameAlreadyAdded = persons.some(
+      (person) => person.name === newName
+    );
+
+    if (isNameAlreadyAdded) {
+      alert(`${newName} is already added.`);
+    } else {
+      setPersons(persons.concat({ name: newName }));
+    }
   };
 
   const handleChange = (event) => {
@@ -18,7 +28,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={addName}>
         <div>
-          name: <input onChange={handleChange} />
+          name: <input onChange={handleChange} value={newName} />
         </div>
         <div>
           <button type="submit">add</button>
