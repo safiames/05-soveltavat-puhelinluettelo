@@ -1,34 +1,48 @@
 import React, { useState } from "react";
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas", number: "123-456-7890" },
+  ]);
   const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault();
 
-    // Check if the name already exists
     const isNameAlreadyAdded = persons.some(
       (person) => person.name === newName
     );
+    const isNumberAlreadyAdded = persons.some(
+      (person) => person.number === newNumber
+    );
 
-    if (isNameAlreadyAdded) {
-      alert(`${newName} is already added.`);
+    if (isNameAlreadyAdded || isNumberAlreadyAdded) {
+      alert(`${newName} or ${newNumber} is already added.`);
     } else {
-      setPersons(persons.concat({ name: newName }));
+      setPersons(persons.concat({ name: newName, number: newNumber }));
+      setNewName("");
+      setNewNumber("");
     }
   };
 
-  const handleChange = (event) => {
+  const handleNameChange = (event) => {
     setNewName(event.target.value);
+  };
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value);
   };
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addName}>
+      <form onSubmit={addPerson}>
         <div>
-          name: <input onChange={handleChange} value={newName} />
+          name: <input onChange={handleNameChange} value={newName} />
+        </div>
+        <div>
+          number: <input onChange={handleNumberChange} value={newNumber} />
         </div>
         <div>
           <button type="submit">add</button>
@@ -36,8 +50,10 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person) => (
-          <li key={person.name}>{person.name}</li>
+        {persons.map((person, index) => (
+          <li key={index}>
+            {person.name} - {person.number}
+          </li>
         ))}
       </ul>
     </div>
