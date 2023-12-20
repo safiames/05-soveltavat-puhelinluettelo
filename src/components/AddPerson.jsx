@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FormPerson = ({ addPerson }) => {
+const AddPerson = ({ addPerson }) => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
@@ -41,4 +41,4 @@ const FormPerson = ({ addPerson }) => {
   );
 };
 
-export default FormPerson;
+export default AddPerson;

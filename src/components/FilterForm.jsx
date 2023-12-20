@@ -1,4 +1,4 @@
-const Filter = ({ filterPersons, searchTerm, updateSearchTerm }) => {
+const FilterForm = ({ filterPersons, searchTerm, updateSearchTerm }) => {
   const handleSearchChange = (event) => {
     updateSearchTerm(event.target.value);
     filterPersons(event.target.value);
@@ -12,4 +12,4 @@ const Filter = ({ filterPersons, searchTerm, updateSearchTerm }) => {
   );
 };
 
-export default Filter;
+export default FilterForm;
